@@ -1,10 +1,25 @@
-import './App.css';
+import "./App.css";
+import Home from "./pages/Home";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import CompleteRegistration from "./pages/auth/CompleteRegistration";
 
 function App() {
   return (
-    <div className="flex justify-center items-center">
-      <h1 className="text-3xl font-bold underline">HellO World, Printeebo</h1>
-    </div>
+    <>
+      <ToastContainer />
+      <Router>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/register/complete" component={CompleteRegistration} />
+          <Route path="/" component={Home} exact />
+        </Switch>
+      </Router>
+    </>
   );
 }
 
