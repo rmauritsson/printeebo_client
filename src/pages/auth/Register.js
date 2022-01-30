@@ -7,9 +7,10 @@ const Register = () => {
   const [registrationEmail, setRegistrationEmail] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [validationMessage, setValidationMessage] = useState("");
+
   const notification = () =>
     toast.success(
-      `Click the link sent to ${registrationEmail} to complete your registration`
+      `Using the same device, click the link sent to ${registrationEmail} to complete your registration`
     );
 
   const emailValidation = () => {
@@ -23,7 +24,7 @@ const Register = () => {
 
     //Send email for verification in firebase
     const config = {
-      url: "http://localhost:3000/complete-registration",
+      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
       handleCodeInApp: true,
     };
 
@@ -48,8 +49,8 @@ const Register = () => {
   };
   //
   return (
-    <div>
-      <h1 className="text-2xl text-blue-500">Register Page</h1>
+    <div className="container mx-auto px-12">
+      <h1 className="text-2xl text-blue-500">Registration</h1>
       <Link to="/" className="p-0 text-[14px]">
         Back
       </Link>

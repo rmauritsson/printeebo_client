@@ -14,8 +14,8 @@ function App() {
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
           <Route path="/register/complete" component={CompleteRegistration} />
+          <Route path="/register" component={Register} />
           <Route path="/" component={Home} exact />
         </Switch>
       </Router>
