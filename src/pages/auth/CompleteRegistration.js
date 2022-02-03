@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react/cjs/react.development";
@@ -9,6 +10,8 @@ const CompleteRegistration = ({ history }) => {
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [role, setRole] = useState("");
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const email = localStorage.getItem("emailForRegistration");
@@ -36,7 +39,18 @@ const CompleteRegistration = ({ history }) => {
           const idTokenResult = await user.getIdTokenResult();
 
           //populate user in redux store
-          //result.user.displayName
+
+          dispatch({
+            type: "LOGGED_IN_USER",
+            payload: {
+              name: user.displayName,
+              email: user.email,
+              phone: phoneNumber,
+              role: role,
+              token: idTokenResult.token,
+            },
+          });
+
           //redirect
           history.push("/");
         }

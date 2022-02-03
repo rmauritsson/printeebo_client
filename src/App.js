@@ -1,3 +1,6 @@
+import { auth } from "./firebase";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import "./App.css";
 import Home from "./pages/Home";
 import { ToastContainer } from "react-toastify";
@@ -8,6 +11,23 @@ import Register from "./pages/auth/Register";
 import CompleteRegistration from "./pages/auth/CompleteRegistration";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    //get currently logged in user from firebase and dispatch to redux store
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        console.log("Logged in User", user);
+        const idTokenResult = await user.getIdTokenResult();
+      } else {
+        console.log("No user");
+      }
+    });
+
+    // clean up
+    return () => unsubscribe();
+  }, []);
+
   return (
     <>
       <ToastContainer />
@@ -24,3 +44,6 @@ function App() {
 }
 
 export default App;
+
+// user data saved in store on completion of registration and then sent to backend for verificatio of token.
+//
