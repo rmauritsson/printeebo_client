@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import CompleteRegistration from "./pages/auth/CompleteRegistration";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
+          <Route path="/forgot/password" component={ForgotPassword} />
           <Route path="/register/complete" component={CompleteRegistration} />
           <Route path="/register" component={Register} />
           <Route path="/" component={Home} exact />

@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import firebase from "firebase/compat/app";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state);
   const history = useHistory();
 
   const handleLogOut = () => {
@@ -12,6 +13,7 @@ const Header = () => {
 
     dispatch({
       type: "LOG_OUT",
+      payload: null,
     });
 
     history.push("/login");
@@ -19,17 +21,26 @@ const Header = () => {
 
   return (
     <div className="container mx-auto mt-2">
-      <div class="flex flex-row">
-        <div class="basis-1/4">Home</div>
-        <div class="basis-1/4">Search Bar</div>
-        <div class="basis-1/2">
-          <Link to="/login" className="">
-            Login
-          </Link>
-          <Link to="/register" className="">
-            Register
-          </Link>
-          <button onClick={handleLogOut}>Logout</button>
+      <div className="flex flex-row">
+        <div className="basis-1/4">Home</div>
+
+        <div className="basis-1/4">Search Bar</div>
+        <div className="basis-1/2">
+          {!user && (
+            <Link to="/login" className="">
+              Login
+            </Link>
+          )}
+          {!user && (
+            <Link to="/register" className="">
+              Register
+            </Link>
+          )}
+          {user && (
+            <button className="btn-active btn-primary" onClick={handleLogOut}>
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </div>

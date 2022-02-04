@@ -113,6 +113,10 @@ const Login = ({ history }) => {
           >
             Login with Google
           </button>
+
+          <Link to="/forgot/password" className="mt-2 text-red-300">
+            Forgot Password
+          </Link>
         </div>
       </div>
     </div>

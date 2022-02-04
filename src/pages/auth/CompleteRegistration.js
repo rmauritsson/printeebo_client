@@ -6,6 +6,7 @@ import { useState } from "react/cjs/react.development";
 import { auth } from "../../firebase";
 
 const CompleteRegistration = ({ history }) => {
+  const [name, setName] = useState("");
   const [registrationEmail, setRegistrationEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -43,7 +44,7 @@ const CompleteRegistration = ({ history }) => {
           dispatch({
             type: "LOGGED_IN_USER",
             payload: {
-              name: user.displayName,
+              name: name,
               email: user.email,
               phone: phoneNumber,
               role: role,
@@ -83,6 +84,14 @@ const CompleteRegistration = ({ history }) => {
             </div>
           </div>
 
+          <input
+            className="border p-2 mx-2 mb-2"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Full Name"
+            readOnly
+          />
           <input
             className="border p-2 mx-2 mb-2"
             type="text"
