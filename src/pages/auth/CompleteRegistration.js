@@ -1,9 +1,24 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react/cjs/react.development";
 import { auth } from "../../firebase";
+import axios from "axios";
+
+const userAuth = async (authtoken, phoneNumber, role) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API_URL}/user-auth`,
+    {},
+    {
+      headers: {
+        authtoken,
+        phoneNumber,
+        role,
+      },
+    }
+  );
+};
 
 const CompleteRegistration = ({ history }) => {
   const [name, setName] = useState("");
@@ -12,12 +27,15 @@ const CompleteRegistration = ({ history }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [role, setRole] = useState("");
 
+  const { user } = useSelector((state) => ({ ...state }));
+
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (user && user.token) history.push("/");
     const email = localStorage.getItem("emailForRegistration");
     setRegistrationEmail(email);
-  }, []);
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,20 +58,24 @@ const CompleteRegistration = ({ history }) => {
           const idTokenResult = await user.getIdTokenResult();
 
           //populate user in redux store
+          userAuth(idTokenResult.token, phoneNumber, role)
+            .then((res) => {
+              console.log("Response from Server on Complete Registration", res);
 
-          dispatch({
-            type: "LOGGED_IN_USER",
-            payload: {
-              name: name,
-              email: user.email,
-              phone: phoneNumber,
-              role: role,
-              token: idTokenResult.token,
-            },
-          });
-
-          //redirect
-          history.push("/");
+              dispatch({
+                type: "LOGGED_IN_USER",
+                payload: {
+                  _id: res.data._id,
+                  name: res.data.name,
+                  email: res.data.email,
+                  phone: res.data.phone,
+                  role: res.data.role,
+                  token: idTokenResult.token,
+                },
+              });
+              history.push("/");
+            })
+            .catch((err) => console.log("Error from Server", err));
         }
       } else {
         toast.error("Please fill in all the fields and submit");
@@ -84,14 +106,6 @@ const CompleteRegistration = ({ history }) => {
             </div>
           </div>
 
-          <input
-            className="border p-2 mx-2 mb-2"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Full Name"
-            readOnly
-          />
           <input
             className="border p-2 mx-2 mb-2"
             type="text"

@@ -10,6 +10,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import CompleteRegistration from "./pages/auth/CompleteRegistration";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import { currentUser } from "./functions/auth";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,8 +19,25 @@ function App() {
     //get currently logged in user from firebase and dispatch to redux store
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        console.log("Logged in User", user);
+        //console.log("Logged in User", user);
         const idTokenResult = await user.getIdTokenResult();
+
+        currentUser(idTokenResult.token)
+          .then((res) => {
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                _id: res.data._id,
+                name: res.data.name,
+                email: res.data.email,
+                phone: res.data.phone,
+                role: res.data.role,
+                token: idTokenResult.token,
+              },
+            });
+            // history.push("/");
+          })
+          .catch((err) => console.log("Error from Server on App Load", err));
       } else {
         console.log("No user");
       }

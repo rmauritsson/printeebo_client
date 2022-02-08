@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../../firebase";
 
-const Register = () => {
+const Register = ({ history }) => {
   const [registrationEmail, setRegistrationEmail] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [validationMessage, setValidationMessage] = useState("");
+
+  const { user } = useSelector((state) => ({ ...state }));
+
+  useEffect(() => {
+    if (user && user.token) history.push("/");
+  }, [user]);
 
   const notification = () =>
     toast.success(

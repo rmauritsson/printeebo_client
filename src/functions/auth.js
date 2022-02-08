@@ -1,0 +1,13 @@
+import axios from "axios";
+
+export const currentUser = async (authtoken) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API_URL}/current-user`,
+    {},
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+};
