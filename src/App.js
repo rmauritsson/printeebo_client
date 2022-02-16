@@ -11,6 +11,11 @@ import Register from "./pages/auth/Register";
 import CompleteRegistration from "./pages/auth/CompleteRegistration";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import { currentUser } from "./functions/auth";
+import UserHistory from "./pages/user/History";
+import StoreDashboard from "./pages/store/Dashboard";
+import UserRoute from "./components/routes/UserRoute";
+import UpdatePassword from "./pages/user/UpdatePassword";
+import Wishlist from "./pages/user/Wishlist";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +41,7 @@ function App() {
               },
             });
             // history.push("/");
+            console.log("Logged in User", res.data);
           })
           .catch((err) => console.log("Error from Server on App Load", err));
       } else {
@@ -52,11 +58,19 @@ function App() {
       <ToastContainer />
       <Router>
         <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/forgot/password" component={ForgotPassword} />
-          <Route path="/register/complete" component={CompleteRegistration} />
-          <Route path="/register" component={Register} />
           <Route path="/" component={Home} exact />
+          <Route path="/login" component={Login} exact />
+          <Route
+            exact
+            path="/register/complete"
+            component={CompleteRegistration}
+          />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/forgot/password" component={ForgotPassword} />
+          <UserRoute exact path="/user/history" component={UserHistory} />
+          <UserRoute exact path="/user/password" component={UpdatePassword} />
+          <UserRoute exact path="/user/wishlist" component={Wishlist} />
+          <Route exact path="/store/dashboard" component={StoreDashboard} />
         </Switch>
       </Router>
     </>

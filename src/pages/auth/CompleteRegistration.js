@@ -32,10 +32,20 @@ const CompleteRegistration = ({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user && user.token) history.push("/");
+    if (user && user.token) roleBasedRedirect();
     const email = localStorage.getItem("emailForRegistration");
     setRegistrationEmail(email);
   }, [user]);
+
+  const roleBasedRedirect = (res) => {
+    if (res.data.role === "admin") {
+      history.push("/admin/dashboard");
+    } else if (res.data.role === "creator") {
+      history.push("/store/dashboard");
+    } else {
+      history.push("/user/history");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,7 +83,8 @@ const CompleteRegistration = ({ history }) => {
                   token: idTokenResult.token,
                 },
               });
-              history.push("/");
+
+              roleBasedRedirect(res);
             })
             .catch((err) => console.log("Error from Server", err));
         }
