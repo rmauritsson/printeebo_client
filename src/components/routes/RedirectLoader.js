@@ -14,11 +14,12 @@ const RedirectLoader = () => {
     count === 0 && history.push("/");
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
   return (
     <div>
-      <p>Unauthorized acess, Redirecting you in {count} seconds</p>
+      <p>Unauthorized access, Redirecting you in {count} seconds</p>
     </div>
   );
 };

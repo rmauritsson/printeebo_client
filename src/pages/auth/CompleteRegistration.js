@@ -21,7 +21,6 @@ const userAuth = async (authtoken, phoneNumber, role) => {
 };
 
 const CompleteRegistration = ({ history }) => {
-  const [name, setName] = useState("");
   const [registrationEmail, setRegistrationEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -32,9 +31,11 @@ const CompleteRegistration = ({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user && user.token) roleBasedRedirect();
+    if (user && user.token) history.push("/");
     const email = localStorage.getItem("emailForRegistration");
     setRegistrationEmail(email);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const roleBasedRedirect = (res) => {
@@ -140,9 +141,8 @@ const CompleteRegistration = ({ history }) => {
             placeholder="Password"
           />
           <button
-            className="border p-2 mx-2"
             type="submit"
-            className="btn-primary btn-active"
+            className="border p-2 mx-2 btn-primary btn-active"
           >
             Complete Registration
           </button>

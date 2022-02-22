@@ -16,6 +16,15 @@ import StoreDashboard from "./pages/store/Dashboard";
 import UserRoute from "./components/routes/UserRoute";
 import UpdatePassword from "./pages/user/UpdatePassword";
 import Wishlist from "./pages/user/Wishlist";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminRoute from "./components/routes/AdminRoute";
+import StoreOwnerRoute from "./components/routes/StoreOwnerRoute";
+import CreateCategory from "./pages/admin/category/CreateCategory";
+import ViewCategories from "./pages/admin/category/ViewCategories";
+import CreateStore from "./pages/admin/store/CreateStore";
+import ViewStores from "./pages/admin/store/ViewStores";
+import CreateProduct from "./pages/admin/product/CreateProduct";
+import ViewProducts from "./pages/admin/product/ViewProducts";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,6 +60,7 @@ function App() {
 
     // clean up
     return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -70,7 +80,26 @@ function App() {
           <UserRoute exact path="/user/history" component={UserHistory} />
           <UserRoute exact path="/user/password" component={UpdatePassword} />
           <UserRoute exact path="/user/wishlist" component={Wishlist} />
-          <Route exact path="/store/dashboard" component={StoreDashboard} />
+          <StoreOwnerRoute
+            exact
+            path="/store/dashboard"
+            component={StoreDashboard}
+          />
+          <AdminRoute
+            exact
+            path="/admin/dashboard"
+            component={AdminDashboard}
+          />
+          <AdminRoute exact path="/admin/category" component={CreateCategory} />
+          <AdminRoute
+            exact
+            path="/admin/categories"
+            component={ViewCategories}
+          />
+          <AdminRoute exact path="/admin/store" component={CreateStore} />
+          <AdminRoute exact path="/admin/stores" component={ViewStores} />
+          <AdminRoute exact path="/admin/product" component={CreateProduct} />
+          <AdminRoute exact path="/admin/products" component={ViewProducts} />
         </Switch>
       </Router>
     </>

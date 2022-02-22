@@ -25,7 +25,9 @@ const Login = ({ history }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
-    if (user && user.token) roleBasedRedirect();
+    if (user && user.token) history.push("/");
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const roleBasedRedirect = (res) => {
