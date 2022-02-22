@@ -22,11 +22,9 @@ const AdminNav = () => {
         <li className="pt-2 pb-2">
           <Link to="/admin/category">Create Category</Link>
         </li>
+
         <li className="pt-2 pb-2">
-          <Link to="/admin/categories">View Category</Link>
-        </li>
-        <li className="pt-2 pb-2">
-          <Link to="/admin/sub-category">Sub Category</Link>
+          <Link to="/admin/subcategory">Sub Category</Link>
         </li>
         <li className="pt-2 pb-2">
           <Link to="/admin/coupons">Coupons</Link>

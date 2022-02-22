@@ -25,6 +25,7 @@ import CreateStore from "./pages/admin/store/CreateStore";
 import ViewStores from "./pages/admin/store/ViewStores";
 import CreateProduct from "./pages/admin/product/CreateProduct";
 import ViewProducts from "./pages/admin/product/ViewProducts";
+import CreateSubCategory from "./pages/admin/subcategory.js/CreateSubCategory";
 
 function App() {
   const dispatch = useDispatch();
@@ -91,6 +92,11 @@ function App() {
             component={AdminDashboard}
           />
           <AdminRoute exact path="/admin/category" component={CreateCategory} />
+          <AdminRoute
+            exact
+            path="/admin/subcategory"
+            component={CreateSubCategory}
+          />
           <AdminRoute
             exact
             path="/admin/categories"
