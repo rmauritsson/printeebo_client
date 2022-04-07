@@ -74,76 +74,78 @@ const CreateSubCategory = () => {
     category.name.toLowerCase().includes(searchKeyword);
 
   return (
-    <div>
+    <>
       <Header />
-      <h1 className="container mx-auto">Admin Dashboard</h1>
-      <div className="container mx-auto flex flex-row mt-4 ">
-        <div className="basis-1/5">
-          <AdminNav />
-        </div>
-        <div className="basis-4/5">
-          {loading ? (
-            <h4>Loading .......... </h4>
-          ) : (
-            <h4>Create and View Sub Category</h4>
-          )}
-          <div className="my-4">
-            <label>Parent Category</label>
-            <select
-              name="category"
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option>Please select </option>
-              {categories.length > 0 &&
-                categories.map((cat) => (
-                  <option key={cat._id} value={cat._id}>
-                    {cat.name}
-                  </option>
-                ))}
-            </select>
+      <div className="container mx-auto px-4">
+        <h1 className="text-2xl text-blue-500">Admin Dashboard</h1>
+        <div className="flex flex-row mt-4 ">
+          <div className="basis-1/5">
+            <AdminNav />
           </div>
+          <div className="basis-4/5">
+            {loading ? (
+              <h4>Loading .......... </h4>
+            ) : (
+              <h4>Create and View Sub Category</h4>
+            )}
+            <div className="my-4">
+              <label>Parent Category</label>
+              <select
+                name="category"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option>Please select </option>
+                {categories.length > 0 &&
+                  categories.map((cat) => (
+                    <option key={cat._id} value={cat._id}>
+                      {cat.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
 
-          <form onSubmit={handleSubmit}>
-            <input
-              className="border p-2 "
-              type="text"
-              autoFocus
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter Sub Category Name"
-              required
-            />
-            <button type="submit" className="btn-primary btn-active">
-              Create Sub Category
-            </button>
-          </form>
+            <form onSubmit={handleSubmit}>
+              <input
+                className="border p-2 "
+                type="text"
+                autoFocus
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter Sub Category Name"
+                required
+              />
+              <button type="submit" className="btn-primary btn-active">
+                Create Sub Category
+              </button>
+            </form>
 
-          <div className="mt-8">
-            <h4>All Categories</h4>
-            <LocalSearch
-              keyword={searchKeyword}
-              setKeyword={setSearchKeyword}
-              placeholder="Search Sub Category"
-            />
+            <div className="mt-8">
+              <h4>All Categories</h4>
+              <LocalSearch
+                keyword={searchKeyword}
+                setKeyword={setSearchKeyword}
+                placeholder="Search Sub Category"
+              />
 
-            {subcategories.filter(searchFilter(searchKeyword)).map((cat) => (
-              <ul key={cat._id}>
-                <li key={cat._id}>
-                  {cat.name}
+              {subcategories.filter(searchFilter(searchKeyword)).map((cat) => (
+                <ul key={cat._id}>
+                  <li key={cat._id}>
+                    {cat.name}
 
-                  <button
-                    className="mx-8 text-sm"
-                    onClick={() => handleDeleteCategory(cat.slug)}
-                  >
-                    delete
-                  </button>
-                </li>
-              </ul>
-            ))}
+                    <button
+                      className="mx-8 text-sm"
+                      onClick={() => handleDeleteCategory(cat.slug)}
+                    >
+                      delete
+                    </button>
+                  </li>
+                </ul>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -13,6 +14,8 @@ const Register = ({ history }) => {
 
   useEffect(() => {
     if (user && user.token) history.push("/");
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const notification = () =>

@@ -4,33 +4,51 @@ const AdminNav = () => {
   return (
     <nav>
       <ul>
-        <li className="pt-2 pb-2">
-          <Link to="/admin/dashboard">Dashboard</Link>
+        <li className="navlink py-2">
+          <Link to="/admin/dashboard" className="header-link">
+            Dashboard
+          </Link>
         </li>
-        <li className="pt-2 pb-2">
-          <Link to="/admin/store">Create Store</Link>
+        <li className="navlink py-2">
+          <Link to="/admin/store" className="header-link">
+            Create Store
+          </Link>
         </li>
-        <li className="pt-2 pb-2">
-          <Link to="/admin/stores">View Stores</Link>
+        <li className="navlink py-2">
+          <Link to="/admin/stores" className="header-link">
+            View Stores
+          </Link>
         </li>
-        <li className="pt-2 pb-2">
-          <Link to="/admin/product">Create Product</Link>
+        <li className="navlink py-2">
+          <Link to="/admin/product" className="header-link">
+            Create Product
+          </Link>
         </li>
-        <li className="pt-2 pb-2">
-          <Link to="/admin/products">View Products</Link>
+        <li className="navlink py-2">
+          <Link to="/admin/products" className="header-link">
+            View Products
+          </Link>
         </li>
-        <li className="pt-2 pb-2">
-          <Link to="/admin/category">Create Category</Link>
+        <li className="navlink py-2">
+          <Link to="/admin/category" className="header-link">
+            Create Category
+          </Link>
         </li>
 
-        <li className="pt-2 pb-2">
-          <Link to="/admin/subcategory">Sub Category</Link>
+        <li className="navlink py-2">
+          <Link to="/admin/subcategory" className="header-link">
+            Sub Category
+          </Link>
         </li>
-        <li className="pt-2 pb-2">
-          <Link to="/admin/coupons">Coupons</Link>
+        <li className="navlink py-2">
+          <Link to="/admin/coupons" className="header-link">
+            Coupons
+          </Link>
         </li>
-        <li className="pt-2 pb-2">
-          <Link to="/user/password">Password</Link>
+        <li className="navlink py-2">
+          <Link to="/user/password" className="header-link">
+            Password
+          </Link>
         </li>
       </ul>
     </nav>

@@ -42,8 +42,6 @@ const CreateCategory = () => {
         setLoading(false);
         console.log(err.message);
       });
-
-    createCategory.cancel();
   };
 
   const handleDeleteCategory = async (slug) => {
@@ -67,56 +65,59 @@ const CreateCategory = () => {
     category.name.toLowerCase().includes(searchKeyword);
 
   return (
-    <div>
+    <>
       <Header />
-      <h1 className="container mx-auto">Admin Dashboard</h1>
-      <div className="container mx-auto flex flex-row mt-4 ">
-        <div className="basis-1/5">
-          <AdminNav />
-        </div>
-        <div className="basis-4/5">
-          {loading ? <h4>Loading .......... </h4> : <h4>Create Category</h4>}
-          <form onSubmit={handleSubmit}>
-            <input
-              className="border p-2 "
-              type="text"
-              autoFocus
-              value={name}
-              onChange={(e) => setCategoryName(e.target.value)}
-              placeholder="Enter Category Name"
-              required
-            />
-            <button type="submit" className="btn-primary btn-active">
-              Create Category
-            </button>
-          </form>
 
-          <div className="mt-8">
-            <h4>All Categories</h4>
-            <LocalSearch
-              keyword={searchKeyword}
-              setKeyword={setSearchKeyword}
-              placeholder="Search Category"
-            />
+      <div className="container mx-auto px-4">
+        <h1 className="text-2xl text-blue-500">Admin Dashboard</h1>
+        <div className="flex flex-row mt-4 ">
+          <div className="basis-1/5">
+            <AdminNav />
+          </div>
+          <div className="basis-4/5">
+            {loading ? <h4>Loading .......... </h4> : <h4>Create Category</h4>}
+            <form onSubmit={handleSubmit}>
+              <input
+                className="border p-2 "
+                type="text"
+                autoFocus
+                value={name}
+                onChange={(e) => setCategoryName(e.target.value)}
+                placeholder="Enter Category Name"
+                required
+              />
+              <button type="submit" className="btn-primary btn-active">
+                Create Category
+              </button>
+            </form>
 
-            {categories.filter(searchFilter(searchKeyword)).map((cat) => (
-              <ul key={cat._id}>
-                <li key={cat._id}>
-                  {cat.name}
+            <div className="mt-8">
+              <h4>All Categories</h4>
+              <LocalSearch
+                keyword={searchKeyword}
+                setKeyword={setSearchKeyword}
+                placeholder="Search Category"
+              />
 
-                  <button
-                    className="mx-8 text-sm"
-                    onClick={() => handleDeleteCategory(cat.slug)}
-                  >
-                    delete
-                  </button>
-                </li>
-              </ul>
-            ))}
+              {categories.filter(searchFilter(searchKeyword)).map((cat) => (
+                <ul key={cat._id}>
+                  <li key={cat._id}>
+                    {cat.name}
+
+                    <button
+                      className="mx-8 text-sm"
+                      onClick={() => handleDeleteCategory(cat.slug)}
+                    >
+                      delete
+                    </button>
+                  </li>
+                </ul>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

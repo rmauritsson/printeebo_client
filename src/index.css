@@ -1,3 +1,6 @@
+/* top header font */
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
+
 @tailwind base;
 
 @layer base {
@@ -16,9 +19,6 @@
   h3 {
     @apply text-lg;
   }
-  a {
-    @apply text-blue-600 underline;
-  }
 }
 
 @tailwind components;
@@ -34,6 +34,12 @@
 
   .btn-disabled {
     @apply bg-gray-500 hover:bg-gray-700  focus:ring-gray-400;
+  }
+  .navlink {
+    @apply uppercase mx-2 text-[13px] font-sourceSans font-bold;
+  }
+  .header-link {
+    @apply no-underline text-black;
   }
 }
 @tailwind utilities;

@@ -21,11 +21,12 @@ import AdminRoute from "./components/routes/AdminRoute";
 import StoreOwnerRoute from "./components/routes/StoreOwnerRoute";
 import CreateCategory from "./pages/admin/category/CreateCategory";
 import ViewCategories from "./pages/admin/category/ViewCategories";
-import CreateStore from "./pages/admin/store/CreateStore";
 import ViewStores from "./pages/admin/store/ViewStores";
 import CreateProduct from "./pages/admin/product/CreateProduct";
 import ViewProducts from "./pages/admin/product/ViewProducts";
 import CreateSubCategory from "./pages/admin/subcategory.js/CreateSubCategory";
+import AdminCreateStore from "./pages/admin/store/CreateStore";
+import StoreOwnerCreateStore from "./pages/store/CreateStore";
 
 function App() {
   const dispatch = useDispatch();
@@ -86,6 +87,13 @@ function App() {
             path="/store/dashboard"
             component={StoreDashboard}
           />
+
+          <StoreOwnerRoute
+            exact
+            path="/store/create"
+            component={StoreOwnerCreateStore}
+          />
+
           <AdminRoute
             exact
             path="/admin/dashboard"
@@ -102,7 +110,7 @@ function App() {
             path="/admin/categories"
             component={ViewCategories}
           />
-          <AdminRoute exact path="/admin/store" component={CreateStore} />
+          <AdminRoute exact path="/admin/store" component={AdminCreateStore} />
           <AdminRoute exact path="/admin/stores" component={ViewStores} />
           <AdminRoute exact path="/admin/product" component={CreateProduct} />
           <AdminRoute exact path="/admin/products" component={ViewProducts} />

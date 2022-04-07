@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-const Header = () => {
+const TopHeader = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state);
   const history = useHistory();
@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <div>
       <div className="h-[2.5rem] bg-silver w-full flex items-center justify-end">
-        <ul className="flex mx-[2.5rem]">
+        <ul className="flex mx-[2rem]">
           <li className="navlink">
             <Link to="/" className="header-link">
               Help
@@ -86,4 +86,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default TopHeader;

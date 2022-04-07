@@ -8,7 +8,7 @@ const CreatorNav = () => {
           <Link to="/store/dashboard">Dashboard</Link>
         </li>
         <li className="pt-2 pb-2">
-          <Link to="/store/add">Create Store</Link>
+          <Link to="/store/create">Create Store</Link>
         </li>
 
         <li className="pt-2 pb-2">

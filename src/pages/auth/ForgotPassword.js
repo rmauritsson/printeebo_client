@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { auth, googleAuthProvider } from "../../firebase";
+import { auth } from "../../firebase";
 
 const ForgotPassword = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -11,6 +10,7 @@ const ForgotPassword = ({ history }) => {
 
   useEffect(() => {
     if (user && user.token) history.push("/");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const notification = () =>
