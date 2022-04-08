@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import DefaultLayout from "../layouts/DefaultLayout";
 
 const RedirectLoader = () => {
   const history = useHistory();
@@ -18,9 +19,11 @@ const RedirectLoader = () => {
   }, [count]);
 
   return (
-    <div>
-      <p>Unauthorized access, Redirecting you in {count} seconds</p>
-    </div>
+    <DefaultLayout>
+      <div className="flex items-center justify-center">
+        <p>Unauthorized access, Redirecting you in {count} seconds</p>
+      </div>
+    </DefaultLayout>
   );
 };
 export default RedirectLoader;

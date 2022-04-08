@@ -9,29 +9,18 @@ const menu = [
     size: 0,
   },
   {
-    title: "Create Store",
-    link: "/admin/store",
-    icon: <IoApps />,
-    size: 0,
-  },
-  {
     title: "Stores",
     link: "/admin/stores",
     icon: <IoApps />,
     size: 1,
   },
   {
-    title: "Create Product",
-    link: "/admin/product",
-    icon: <IoApps />,
-    size: 0,
-  },
-  {
-    title: "View Products",
+    title: "Products",
     link: "/admin/products",
     icon: <IoApps />,
     size: 7,
   },
+
   {
     title: "Category",
     link: "/admin/category",

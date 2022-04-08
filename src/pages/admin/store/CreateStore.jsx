@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import LocalSearch from "../../../components/forms/LocalSearch";
+import DefaultLayout from "../../../components/layouts/DefaultLayout";
+import { IoTrashOutline } from "react-icons/io5";
 
 const AdminCreateStore = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -64,72 +66,75 @@ const AdminCreateStore = () => {
     store.name.toLowerCase().includes(searchKeyword);
 
   return (
-    <>
-      <Header />
-      <div className="container mx-auto px-4">
-        <h1 className="text-2xl text-blue-500">Admin Dashboard</h1>
-        <div className="flex flex-row mt-4 ">
-          <div className="basis-1/5">
-            <AdminNav />
+    <DefaultLayout>
+      <div className="flex flex-row mt-4 ">
+        <div className="basis-1/5">
+          <AdminNav />
+        </div>
+        <div className={styles.contentWrapper}>
+          <div className="flex justify-between items-center mb-4">
+            <h5 className={styles.title}>Add Store</h5>
           </div>
-          <div className="basis-4/5">
-            <p>Store owner is {owner}</p>
-            {loading ? <h4>Loading .......... </h4> : <h4>Create Store</h4>}
-            <form onSubmit={handleSubmit}>
-              <div>
+
+          <form onSubmit={handleSubmit} className="flex flex-col">
+            <div>
+              <div className="flex flex-col">
+                <label
+                  for="title"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+                >
+                  Store Name
+                </label>
                 <input
-                  className="border p-2 mt-2"
+                  className="inputField mb-4"
                   type="text"
                   autoFocus
+                  name="title"
+                  id="title"
                   value={name}
                   onChange={(e) => setStoreName(e.target.value)}
-                  placeholder="Enter Store Name"
-                  required
-                />
-                <input
-                  className="border p-2 mt-2"
-                  type="text"
-                  autoFocus
-                  value={description}
-                  onChange={(e) => setStoreDescription(e.target.value)}
-                  placeholder="Enter Description"
+                  placeholder="Store Name"
                   required
                 />
               </div>
 
-              <button type="submit" className="btn-primary btn-active mt-2">
-                Create Store
-              </button>
-            </form>
-
-            <div className="mt-8">
-              <h4>All Stores</h4>
-              <LocalSearch
-                keyword={searchKeyword}
-                setKeyword={setSearchKeyword}
-                placeholder="Search Store"
-              />
-
-              {stores.filter(searchFilter(searchKeyword)).map((store) => (
-                <ul key={store._id}>
-                  <li key={store._id}>
-                    {store.name}
-
-                    <button
-                      className="mx-8 text-sm"
-                      onClick={() => handleDeleteStore(store.slug)}
-                    >
-                      delete
-                    </button>
-                  </li>
-                </ul>
-              ))}
+              <div className="flex flex-col">
+                <label
+                  for="description"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+                >
+                  Store Description
+                </label>
+                <textarea
+                  cols="30"
+                  rows="10"
+                  className="inputField mb-4"
+                  type="text"
+                  autoFocus
+                  name="description"
+                  id="description"
+                  value={description}
+                  onChange={(e) => setStoreDescription(e.target.value)}
+                  placeholder="Product Description"
+                  required
+                />
+              </div>
             </div>
-          </div>
+            <button type="submit" className="btn-dashboard">
+              Add Store
+            </button>
+          </form>
         </div>
       </div>
-    </>
+    </DefaultLayout>
   );
+};
+
+const styles = {
+  contentWrapper:
+    "basis-4/5 p-4 w-full bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700",
+  title: "text-xl font-bold leading-none text-gray-900 dark:text-white",
+  unorderedList: "divide-y divide-gray-200 dark:divide-gray-700",
 };
 
 export default AdminCreateStore;
