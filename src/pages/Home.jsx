@@ -4,7 +4,7 @@ import SiderBarLayout from "../components/layouts/SideBarLayout";
 const Home = () => {
   return (
     <DefaultLayout>
-      <h1>Home Page</h1>
+      <p>Loading</p>
       <SiderBarLayout />
     </DefaultLayout>
   );
